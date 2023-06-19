@@ -32,7 +32,10 @@ class _QuizState extends State<Quiz> {
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.purple, Color.fromARGB(255, 159, 38, 180)],
+              colors: [
+                Color.fromARGB(255, 177, 44, 201),
+                Color.fromARGB(255, 40, 127, 203)
+              ],
             ),
           ),
           child: currentScreen,
