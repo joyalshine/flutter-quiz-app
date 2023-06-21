@@ -21,6 +21,7 @@ class QuizOption extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30))),
         child: Text(
           option,
+          textAlign: TextAlign.center,
           style: TextStyle(fontSize: 17),
         ),
       ),

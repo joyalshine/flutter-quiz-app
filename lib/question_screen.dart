@@ -1,15 +1,29 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:quiz_app/quiz_option_button.dart';
 import 'package:quiz_app/data/questions.dart';
 
-class QuestionScreen extends StatelessWidget {
-  const QuestionScreen({super.key});
+class QuestionScreen extends StatefulWidget {
+  const QuestionScreen(this.addAnswer, {super.key});
+
+  final void Function(String option) addAnswer;
+
+  @override
+  State<QuestionScreen> createState() => _QuestionScreenState();
+}
+
+class _QuestionScreenState extends State<QuestionScreen> {
+  var currentQuestionIndex = 0;
+
+  void nextquestion(var answer) {
+    widget.addAnswer(answer);
+    setState(() {
+      currentQuestionIndex++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    var currentQuestion = questions[0];
+    var currentQuestion = questions[currentQuestionIndex];
 
     return SizedBox(
         width: double.infinity,
@@ -28,8 +42,10 @@ class QuestionScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              ...currentQuestion.answers.map((item) {
-                return QuizOption(item, onTap: () {});
+              ...currentQuestion.shuffleOptions().map((item) {
+                return QuizOption(item, onTap: () {
+                  nextquestion(item);
+                });
               })
             ],
           ),
