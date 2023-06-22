@@ -14,14 +14,14 @@ class Quiz extends StatefulWidget {
 class _QuizState extends State<Quiz> {
   Widget? currentScreen;
 
-  final List<String> answers = [];
+  List<String> answers = [];
 
   void addAnswer(String option) {
     answers.add(option);
 
     if (answers.length == questions.length) {
       setState(() {
-        currentScreen = AnswerScreen(answers);
+        currentScreen = AnswerScreen(answers, changeScreen);
       });
     }
   }
@@ -32,9 +32,16 @@ class _QuizState extends State<Quiz> {
     super.initState();
   }
 
-  void changeScreen() {
+  void restart() {
+    answers = [];
+    currentScreen = HomeScreen(changeScreen);
+  }
+
+  void changeScreen(String screen) {
     setState(() {
-      currentScreen = QuestionScreen(addAnswer);
+      screen == 'question_screen'
+          ? currentScreen = QuestionScreen(addAnswer)
+          : restart();
     });
   }
 

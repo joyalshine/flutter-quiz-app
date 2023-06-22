@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen(this.nextScreen, {super.key});
 
-  final void Function() nextScreen;
+  final void Function(String nextScreen) nextScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,9 @@ class HomeScreen extends StatelessWidget {
             height: 15,
           ),
           OutlinedButton.icon(
-            onPressed: nextScreen,
+            onPressed: () {
+              nextScreen('question_screen');
+            },
             icon: const Icon(Icons.arrow_forward),
             style: OutlinedButton.styleFrom(foregroundColor: Colors.white),
             label: const Text('Start Quiz'),
